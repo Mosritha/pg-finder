@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Properties - RoomRoute</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header img {
+            height: 40px;
+        }
+
+        .btn-primary {
+            background-color: #6c63ff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #5549e8;
+        }
+
+        .content {
+            margin-top:50px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .content h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(61, 36, 188, 1);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            width: fit-content;
+        }
+
+        .stats div {
+            text-align: center;
+            padding: 0 15px;
+            position: relative;
+        }
+
+        .stats div:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 10%;
+            height: 80%;
+            width: 1px;
+            background-color: white;
+        }
+
+        .stats span {
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .steps {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            position: relative;
+        }
+
+        .step {
+            background-color: white;
+            color: black;
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 150px;
+            position: relative;
+        }
+
+        .steps .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 2px;
+            background-color: black;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: flex-start;
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .features-list {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .features-list h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .feature {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .form-section {
+            flex: 1;
+            padding: 20px;
+            background-color: #e6f7ff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-section label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-section input, .form-section select, .form-section button {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-section button {
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-section button:hover {
+            background-color: #5549e8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .menu-container {
+    position: relative;
+}
+
+.menu-icon {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.menu-items {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 10;
+    width: 279px;
+
+}
+
+.menu-items a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px 0;
+    color: #000;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+
+}
+.menu-items button {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px 0;
+    text-align: center;
+    background-color: rgb(61, 36, 188);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.menu-items button:hover {
+    background-color: rgba(61, 36, 188, 0.8);
+}
+.header {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;  /* Spread content across the header */
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 2px -2px gray; /* Add shadow for the fixed header */
+}
+
+/* RoomRoute Text */
+.header .roomroute {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(61, 36, 188);
+}
+
+/* List Your Property Button and Menu Icon Side by Side */
+.header .button-container {
+    display: flex;
+    align-items: center;
+}
+
+.header .list-button {
+    background-color: rgb(61, 36, 188, 100);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 20px; /* Space between button and menu icon */
+}
+
+.header .menu-icon {
+    font-size: 24px;
+    color: #000;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="roomroute">RoomRoute</div> <!-- RoomRoute Text -->
+        <div class="button-container">
+            <div class="menu-container">
+                <div class="menu-icon" onclick="toggleMenu()">☰</div>
+                <div class="menu-items" id="menu">
+                    <a href="./profile.html">View Profile</a>
+                    <a href="./veiwproperty.html">View Property</a>
+                    <a href="./listyourproperty.html">Add Property</a>
+                    <a href="./login.html"><button>Login</button></a>
+                    <a href="./create.html"><button>Create Account</button></a>    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div class="content">
+    <h1>For Property Owners</h1>
+    <p>Rent your property for free</p>
+    
+<section class="features">
+    <div class="features-list">
+        <h2>Why 45K+ owners choose us</h2>
+        <div class="feature">
+            <img src="./images/listyour1.png" alt="Free Marketing">
+            <div>
+                <p><strong>Free Marketing</strong></p>
+                <p>We help market your property for free to target tenants.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <img src="./images/listyour2.png" alt="Verified Tenants">
+            <div>
+                <p><strong>Verified Tenants</strong></p>
+                <p>All tenants are verified for security and reliability.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <img src="./images/listyour3.png" alt="Free Assisted Visits">
+            <div>
+                <p><strong>Free Assisted Visits</strong></p>
+                <p>Our experts arrange assisted visits for interested tenants.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <img src="./images/listyour4.png" alt="Best Price Guidance">
+            <div>
+                <p><strong>Best Price Guidance</strong></p>
+                <p>We help you set competitive pricing for your property.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <img src="./images/listyour5.png" alt="Rent on Time">
+            <div>
+                <p><strong>Rent on Time</strong></p>
+                <p>We ensure timely rent payment from tenants.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <img src="./images/listyour6.png" alt="Property Maintenance">
+            <div>
+                <p><strong>Property Maintenance</strong></p>
+                <p>We assist in property upkeep for hassle-free management.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <form>
+            <label for="owner-name">Name of the owner</label>
+            <input type="text" id="owner-name" name="owner-name" required>
+             <br><br>
+            <label for="property-type">Property Type</label>
+            <div>
+                <input type="radio" id="apartment" name="property-type" value="Apartment" required>
+                <label for="apartment">Apartment</label>
+                <input type="radio" id="individual" name="property-type" value="Individual">
+                <label for="individual">Individual</label>
+            </div>
+            <br><br>
+            <label for="bedrooms">No. of bedrooms in the property</label>
+            <div>
+                <input type="radio" id="bedroom1" name="bedrooms" value="1" required>
+                <label for="bedroom1">1</label>
+                <input type="radio" id="bedroom2" name="bedrooms" value="2">
+                <label for="bedroom2">2</label>
+                <input type="radio" id="bedroom3" name="bedrooms" value="3">
+                <label for="bedroom3">3</label>
+                <input type="radio" id="bedroom4" name="bedrooms" value="4">
+                <label for="bedroom4">4</label>
+            </div>
+            <br><br>
+            <label for="city">Select City</label>
+            <select id="city" name="city" required>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Chennai">Chennai</option>
+            </select>
+            <br><br>
+            <label for="location">Where is your property located?</label>
+            <input type="text" id="location" name="location" required>
+            <br><br>
+            <label for="mobile">Enter Mobile Number</label>
+            <input type="tel" id="mobile" name="mobile" required>
+            <br><br>
+            <button type="submit" onclick="window.location.href='pgdetails.html'">Continue</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 RoomRoute. All Rights Reserved.</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG"></script>
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('menu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+</body>
+</html>

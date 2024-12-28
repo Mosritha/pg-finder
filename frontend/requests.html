@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - PG Property Requests</title>
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            margin: 0.2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .accept-btn {
+            background-color: #4CAF50;
+        }
+
+        .reject-btn {
+            background-color: #f44336;
+        }
+
+        .view-btn {
+            background-color: #2196F3;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .header {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;  /* Spread content across the header */
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 2px -2px gray; /* Add shadow for the fixed header */
+}
+
+/* RoomRoute Text */
+.header .roomroute {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(61, 36, 188);
+}
+
+/* List Your Property Button and Menu Icon Side by Side */
+.header .button-container {
+    display: flex;
+    align-items: center;
+}
+
+.header .list-button {
+    background-color: rgb(61, 36, 188, 100);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 20px; /* Space between button and menu icon */
+}
+
+.header .menu-icon {
+    font-size: 24px;
+    color: #000;
+    cursor: pointer;
+}
+.menu-container {
+    position: relative;
+}
+
+.menu-icon {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.menu-items {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 10;
+    width: 279px;
+}
+
+.menu-items a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px 0;
+    color: #000;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+
+}
+.menu-items button {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px 0;
+    text-align: center;
+    background-color: rgb(61, 36, 188);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.menu-items button:hover {
+    background-color: rgba(61, 36, 188, 0.8);
+}
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="roomroute">RoomRoute</div> <!-- RoomRoute Text -->
+        <div class="button-container">
+            <div class="menu-container">
+                <div class="menu-icon" onclick="toggleMenu()">☰</div>
+                <div class="menu-items" id="menu">
+                    <a href="./user.html"><button>User Details</button></a>
+                    <a href="./owner.html"><button>Property Owner details</button></a>
+                    <a href="./pglist.html"><button>Available Properties</button></a>
+                    <a href="./requests.html"><button>Requests</button></a>
+                    <a href="./adminaddprop.html"><button>Add Property</button></a>
+                    <a href="./main.html"><button>Go to Website</button></a>   
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <main>
+        <header>
+            <h1>Admin Dashboard - PG Property Requests</h1>
+        </header>
+        <section id="requests-section">
+            <h2>Pending Requests</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>PG Name</th>
+                        <th>Location</th>
+                        <th>Rent</th>
+                        <th>Contact</th>
+                        <th>Amenities</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="requests-table">
+                    <tr>
+                        <td class="pg-name">Sunny Side PG</td>
+                        <td class="pg-location">Downtown</td>
+                        <td class="pg-rent">$300</td>
+                        <td class="pg-contact">+123456789</td>
+                        <td class="pg-amenities">Wi-Fi, Laundry, Meals</td>
+                        <td>
+                            <button class="accept-btn">Accept</button>
+                            <button class="reject-btn">Reject</button>
+                            <button class="view-btn">View</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pg-name">Green View PG</td>
+                        <td class="pg-location">Suburb</td>
+                        <td class="pg-rent">$250</td>
+                        <td class="pg-contact">+987654321</td>
+                        <td class="pg-amenities">Parking, Wi-Fi, Gym</td>
+                        <td>
+                            <button class="accept-btn">Accept</button>
+                            <button class="reject-btn">Reject</button>
+                            <button class="view-btn">View</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pg-name">Comfort Stay PG</td>
+                        <td class="pg-location">City Center</td>
+                        <td class="pg-rent">$350</td>
+                        <td class="pg-contact">+1122334455</td>
+                        <td class="pg-amenities">Meals, AC, Housekeeping</td>
+                        <td>
+                            <button class="accept-btn">Accept</button>
+                            <button class="reject-btn">Reject</button>
+                            <button class="view-btn">View</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <template id="request-row-template">
+        <tr>
+            <td class="pg-name"></td>
+            <td class="pg-location"></td>
+            <td class="pg-rent"></td>
+            <td class="pg-contact"></td>
+            <td class="pg-amenities"></td>
+            <td>
+                <button class="accept-btn">Accept</button>
+                <button class="reject-btn">Reject</button>
+                <button class="view-btn">View</button>
+            </td>
+        </tr>
+    </template>
+    <footer>
+        <p>&copy; 2024 RoomRoute. All Rights Reserved.</p>
+    </footer>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+    </script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG"></script>
+</body>
+</html>

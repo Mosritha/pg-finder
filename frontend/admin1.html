@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoomRoute</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<!-- Fixed Header Section -->
+<div class="header">
+    <div class="roomroute">RoomRoute</div> <!-- RoomRoute Text -->
+    <div class="button-container">
+        <div class="menu-container">
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+            <div class="menu-items" id="menu">
+                <a href="./user.html"><button>User Details</button></a>
+                <a href="./owner.html"><button>Property Owner details</button></a>
+                <a href="./adminproperty.html"><button>Available Properties</button></a>
+                <a href="./requests.html"><button>Requests</button></a>
+                <a href="./adminaddprop.html"><button>Add Property</button></a>
+                <a href="./main.html"><button>Go to Website</button></a>   
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Banner Section -->
+<section class="banner-section">
+    <div class="container-fluid">
+        <h3 class="pg">PG’s for rent that fit your time line <br> <br> Discover a place you’ll love</h3>
+    </div>
+    
+    
+</section>
+
+<!-- Diverse Section -->
+<section class="diverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <div class="tailor">
+                    <h4 class="text">A life style tailor- <br> made for you</h4>
+                    <p>with diverse housing options, you’re not just choosing a PG; you’re crafting a lifestyle that reflects your individuality. Beyond mere renting, we’re here to support your everyday living, hassle-free</p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <img class="img-fluid abou-img" src="./images/explore1.png" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Privacy, Instant Move-in, Lowest Security Deposit Section -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 privscy">
+                <img class="image" src="./images/Hide.png" alt="">
+                <h1>Un matched privacy</h1>
+                <p>we’re committed to protecting your privacy. Throughout your rental journey, we’ll be there for you every step of the way</p>
+            </div>
+            <div class="col-lg-4 privscy">
+                <img class="image" src="./images/Enter.png" alt="">
+                <h1>Instant move-in</h1>
+                <p>say goodbye to lengthy waits. Find, finalize, and move into your PG without any delay</p>
+            </div> 
+            <div class="col-lg-4 privscy">
+                <img class="image" src="./images/Request Money.png" alt="">
+                <h1>Lowest security Deposit</h1>
+                <p>Understanding financial challenges, we aim for convenience, ensuring a smoother rental journey for you</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="box">
+    <div class="stats-container">
+        <div class="col-lg-6 col-sm-12">
+            <img src="./images/export2.png" alt="">
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat">2,00,000+</div>
+                    <div class="description">Happy customers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat">1,00,000+</div>
+                    <div class="description">PG across India</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat">9+</div>
+                    <div class="description">Cities in India</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat">38+ cr</div>
+                    <div class="description">Savings made on brokerage</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tribe Section with "Find Your Perfect PG" Button -->
+<section class="tribe">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <div class="life">
+                    <h4 class="text">Find your tribe,<br> live your life</h4>
+                    <p>It’s more than just a place to live- it’s where moments come alive. From lively Halloween parties to cultural celebrations, every event is a chance to live life to the fullest</p>
+                    
+                    
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <img class="img-fluid abou-img" src="./images/export3.png" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <p>&copy; 2024 RoomRoute. All Rights Reserved.</p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG"></script>
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('menu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+</body>
+</html>

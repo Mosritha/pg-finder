@@ -1,0 +1,376 @@
+.header {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;  /* Spread content across the header */
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 2px -2px gray; /* Add shadow for the fixed header */
+}
+
+/* RoomRoute Text */
+.header .roomroute {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(61, 36, 188);
+}
+
+/* List Your Property Button and Menu Icon Side by Side */
+.header .button-container {
+    display: flex;
+    align-items: center;
+}
+
+.header .list-button {
+    background-color: rgb(61, 36, 188, 100);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 20px; /* Space between button and menu icon */
+}
+
+.header .menu-icon {
+    font-size: 24px;
+    color: #000;
+    cursor: pointer;
+}
+
+/* Search Bar Style */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: rgb(61, 36, 188, 100); /* Set background color */
+    border-radius: 8px;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    width: 80%;
+    font-size: 16px;
+    padding-left: 10px;
+    background-color: white; /* Location input is white */
+    color: #333; /* Dark text for readability */
+}
+
+.search-bar .dropdown-icon {
+    font-size: 20px;
+    color: white;
+    margin-right: 10px; /* Space between the input and dropdown icon */
+}
+
+.search-bar .search-icon {
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Add margin-top to the content to avoid it being hidden under the fixed header */
+body {
+    margin-top: 80px;
+}
+
+.banner-section {
+    background-image: url(./images/image-4.png);
+    width: 100%;
+    height: 700px;
+}
+
+.pg {
+    color: #000;
+    text-align: center;
+    margin-top: 150px;
+    font-weight: 600;
+}
+
+.abou-img {
+    margin-top: 30px;
+    height: 500px;
+    margin-left: 50px;
+}
+
+.tailor {
+    margin-top: 200px;
+}
+
+.life {
+    margin-top: 200px;
+}
+
+.image {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin-top: 40px;
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.privscy {
+    text-align: center;
+}
+
+.text {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.stat {
+    font-weight: bold;
+    font-size: 24px;
+    color: #000;
+}
+
+.description {
+    font-weight: normal;
+    font-size: 16px;
+}
+
+.stat-item {
+    flex: 1;
+    margin-left: 150px;
+    margin-top: 50px;
+}
+
+.box {
+    background-color: rgb(235, 253, 255, 100);
+}
+
+/* General Search Container */
+.search {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: rgb(61, 36, 188); /* Background color */
+    border-radius: 50px; /* Corner radius */
+    padding: 5px 15px;
+    width: 300px; /* Adjust width as needed */
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Input Field */
+.input-container {
+    display: flex;
+    align-items: center;
+    flex: 1; /* Allow input to expand */
+}
+
+.input-container input {
+    background: transparent; /* Transparent background */
+    border: none;
+    outline: none;
+    color: white; /* Input text color */
+    font-size: 14px;
+    width: 100%;
+}
+
+.input-container input::placeholder {
+    color: white; /* Placeholder color */
+    opacity: 1; /* Ensure placeholder is fully visible */
+}
+
+/* Dropdown Icon */
+.dropdown-icon {
+    color: white;
+    margin-right: 5px; /* Spacing between dropdown icon and text */
+}
+
+/* Search Icon */
+.search-icon {
+    color: white;
+    margin-left: 10px; /* Spacing for search icon */
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Optional: Style hover for search bar */
+.search-bar:hover {
+    background-color: rgba(61, 36, 188, 0.9);
+}
+
+
+/* Tribe Section - Add "Find Your Perfect PG" Button */
+.tribe .find-pg-button {
+    background-color: rgb(61, 36, 188, 100);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 20px;
+}
+.menu-container {
+    position: relative;
+}
+
+.menu-icon {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.menu-items {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 10;
+    width: 279px;
+}
+
+.menu-items a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px 0;
+    color: #000;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+
+}
+.menu-items button {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px 0;
+    text-align: center;
+    background-color: rgb(61, 36, 188);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.menu-items button:hover {
+    background-color: rgba(61, 36, 188, 0.8);
+}
+.main-content{
+    text-align:center;
+    margin-top: 200px;
+}
+.profile {
+    text-align:center;
+    margin-top: 20px;
+}
+
+.profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}
+
+.details {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.details p {
+    margin: 5px 0;
+}
+.content {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pg-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pg-details {
+    flex: 1;
+}
+
+.pg-details p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actions button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.actions button:hover {
+    background-color: #0056b3;
+}
+.container {
+    margin-top: 20px;
+}
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.table th, .table td {
+    vertical-align: middle;
+}
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}

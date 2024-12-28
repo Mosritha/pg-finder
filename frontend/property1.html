@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .property-title {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .section-title {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        .carousel-inner img {
+            height: 300px;
+            object-fit: cover;
+        }
+        .btn-book {
+            background-color: rgba(61, 36, 188, 1);
+            color: white;
+            border: none;
+        }
+        .btn-book:hover {
+            background-color: rgba(51, 26, 178, 1);
+        }
+        .review {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #fff;
+        }
+        .stars {
+            color: #ffd700;
+        }
+        .icon-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Property Details Section -->
+        <div class="text-center mb-4">
+            <h1 id="property-title" class="property-title"></h1>
+        </div>
+
+        <!-- Image Carousel -->
+        <div id="propertyCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+            <div class="carousel-inner" id="property-images">
+                <!-- Images will be dynamically loaded here -->
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- Share, Save, Report Section -->
+        <div class="d-flex justify-content-end mb-4">
+            <button class="btn btn-outline-primary me-2 icon-btn"><i class="fas fa-share"></i> Share</button>
+            <button class="btn btn-outline-secondary me-2 icon-btn"><i class="fas fa-heart"></i> Save</button>
+            <button class="btn btn-outline-danger icon-btn"><i class="fas fa-flag"></i> Report</button>
+        </div>
+
+        <!-- Description -->
+        <div>
+            <h4 class="section-title">Description</h4>
+            <p id="property-description"></p>
+        </div>
+
+        <!-- Details Section -->
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="section-title">Details</h4>
+                <ul id="property-details"></ul>
+            </div>
+            <div class="col-md-6">
+                <h4 class="section-title">Rent & Deposit</h4>
+                <p><strong>Rent:</strong> <span id="property-rent"></span></p>
+                <p><strong>Deposit:</strong> <span id="property-deposit"></span></p>
+            </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="mt-4">
+            <h4 class="section-title">Location</h4>
+            <p id="property-location"></p>
+
+            <h4 class="section-title">Amenities</h4>
+            <ul id="property-amenities"></ul>
+
+            <h4 class="section-title">Contact Details</h4>
+            <p><strong>Phone:</strong> <span id="property-contact-phone"></span></p>
+            <p><strong>Email:</strong> <span id="property-contact-email"></span></p>
+        </div>
+
+        <!-- Ratings and Reviews -->
+        <div class="mt-4">
+            <h4 class="section-title">Ratings & Reviews</h4>
+            <div class="mb-3">
+                <strong>Average Rating:</strong> <span id="average-rating"></span>
+                <span id="average-stars" class="stars"></span>
+            </div>
+            <div id="reviews-container">
+                <!-- Reviews will be dynamically loaded here -->
+            </div>
+            <div class="mt-3">
+                <h5>Add Your Review</h5>
+                <form id="review-form">
+                    <div class="mb-3">
+                        <label for="review-rating" class="form-label">Rating</label>
+                        <select id="review-rating" class="form-select" required>
+                            <option value="">Select a rating</option>
+                            <option value="1">1 - Poor</option>
+                            <option value="2">2 - Fair</option>
+                            <option value="3">3 - Good</option>
+                            <option value="4">4 - Very Good</option>
+                            <option value="5">5 - Excellent</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="review-text" class="form-label">Review</label>
+                        <textarea id="review-text" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Book Now Button -->
+        <div class="text-center mt-4">
+            <form action="booknow.html" method="POST">
+                <button type="submit" id="book-now" class="btn btn-book btn-lg">Book Now</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript for Dynamic Data -->
+    <script>
+        // Property Data
+        const properties = {
+    "1": {
+        title: "Semi furnished 2BHK in Nagadasanahalli",
+        images: ["https://via.placeholder.com/400x200", "https://via.placeholder.com/400x200/FF5733"],
+        description: "A spacious 2BHK perfect for boys and girls, located in Nagadasanahalli with a peaceful environment.",
+        details: ["Boys, Girls", "Near Bus Stop", "24/7 Water Supply", "Lift Available"],
+        rent: "₹12,00/month",
+        deposit: "₹75,00",
+        location: "Nagadasanahalli, Bengaluru",
+        amenities: ["Parking", "Power Backup", "24/7 Security", "CCTV Surveillance"],
+        contact: { phone: "+91-9876543210", email: "contact@property1.com" },
+        reviews: [
+            { name: "Alice", rating: 5, text: "Amazing property, very spacious!" },
+            { name: "Bob", rating: 4, text: "Good location, but a bit pricey." }
+        ]
+    },
+    "2": {
+        title: "Fully furnished 3BHK in Whitefield",
+        images: ["https://via.placeholder.com/400x200/28A745", "https://via.placeholder.com/400x200/FF5733"],
+        description: "Premium 3BHK apartment located in the heart of Whitefield, perfect for families.",
+        details: ["Family Only", "Gated Community", "Swimming Pool", "Gym Access"],
+        rent: "₹25,00/month",
+        deposit: "₹10,000",
+        location: "Whitefield, Bengaluru",
+        amenities: ["Parking", "Power Backup", "24/7 Security", "Swimming Pool", "Gym"],
+        contact: { phone: "+91-9876543220", email: "contact@property2.com" },
+        reviews: [
+            { name: "John", rating: 5, text: "Fantastic amenities and great location!" },
+            { name: "Jane", rating: 4, text: "Beautiful apartment, but a bit noisy." }
+        ]
+    },
+    "3": {
+        title: "Fully furnished 2BHK in Koramangala",
+        images: ["https://via.placeholder.com/400x200/007BFF", "https://via.placeholder.com/400x200/FFC300"],
+        description: "A modern studio apartment in the bustling Koramangala area, ideal for working professionals.",
+        details: ["Single Occupancy", "Close to IT Parks", "Fully Furnished"],
+        rent: "₹15,00/month",
+        deposit: "₹50,00",
+        location: "Koramangala, Bengaluru",
+        amenities: ["Wi-Fi", "Power Backup", "CCTV Surveillance"],
+        contact: { phone: "+91-9876543230", email: "contact@property3.com" },
+        reviews: [
+            { name: "Mark", rating: 5, text: "Perfect for single professionals." },
+            { name: "Sara", rating: 4, text: "Convenient location, decent facilities." }
+        ]
+    },
+    "4": {
+        title: "Semi furnished 3BHK in Whitefield",
+        images: ["https://via.placeholder.com/400x200/6F42C1", "https://via.placeholder.com/400x200/E83E8C"],
+        description: "A spacious and luxurious villa in Indiranagar with premium amenities.",
+        details: ["Pets Allowed", "Private Garden", "Swimming Pool"],
+        rent: "₹60,00/month",
+        deposit: "₹3,00,00",
+        location: "Indiranagar, Bengaluru",
+        amenities: ["Parking", "Swimming Pool", "Private Garden", "24/7 Security"],
+        contact: { phone: "+91-9876543240", email: "contact@property4.com" },
+        reviews: [
+            { name: "Emma", rating: 5, text: "Absolutely stunning villa!" },
+            { name: "Liam", rating: 5, text: "Worth every penny." }
+        ]
+    }
+};
+
+        // Function to Load Property Details
+        function loadPropertyDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const propertyId = urlParams.get("id") || "1"; // Default to property 1
+
+            const property = properties[propertyId];
+            if (property) {
+                document.getElementById("property-title").textContent = property.title;
+
+                // Load Images into Carousel
+                const imagesContainer = document.getElementById("property-images");
+                imagesContainer.innerHTML = "";
+                property.images.forEach((image, index) => {
+                    const carouselItem = document.createElement("div");
+                    carouselItem.className = `carousel-item${index === 0 ? " active" : ""}`;
+                    carouselItem.innerHTML = `<img src="${image}" class="d-block w-100" alt="Property Image ${index + 1}">`;
+                    imagesContainer.appendChild(carouselItem);
+                });
+
+                document.getElementById("property-description").textContent = property.description;
+                document.getElementById("property-rent").textContent = property.rent;
+                document.getElementById("property-deposit").textContent = property.deposit;
+
+                const detailsList = document.getElementById("property-details");
+                detailsList.innerHTML = "";
+                property.details.forEach(detail => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = detail;
+                    detailsList.appendChild(listItem);
+                });
+
+                document.getElementById("property-location").textContent = property.location;
+
+                const amenitiesList = document.getElementById("property-amenities");
+                amenitiesList.innerHTML = "";
+                property.amenities.forEach(amenity => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = amenity;
+                    amenitiesList.appendChild(listItem);
+                });
+
+                document.getElementById("property-contact-phone").textContent = property.contact.phone;
+                document.getElementById("property-contact-email").textContent = property.contact.email;
+
+                // Load Reviews
+                const reviewsContainer = document.getElementById("reviews-container");
+                reviewsContainer.innerHTML = "";
+                let totalRating = 0;
+                property.reviews.forEach(review => {
+                    totalRating += review.rating;
+
+                    const reviewDiv = document.createElement("div");
+                    reviewDiv.className = "review";
+                    reviewDiv.innerHTML = `
+                        <p><strong>${review.name}</strong></p>
+                        <p class="stars">${"★".repeat(review.rating)}${"☆".repeat(5 - review.rating)}</p>
+                        <p>${review.text}</p>
+                    `;
+                    reviewsContainer.appendChild(reviewDiv);
+                });
+
+                // Calculate Average Rating
+                const averageRating = (totalRating / property.reviews.length).toFixed(1);
+                document.getElementById("average-rating").textContent = `${averageRating} / 5`;
+                document.getElementById("average-stars").textContent = "★".repeat(Math.round(averageRating)) + "☆".repeat(5 - Math.round(averageRating));
+            }
+        }
+
+        // Handle Review Form Submission
+        document.getElementById("review-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const name = "Anonymous"; // Placeholder for user name
+            const rating = parseInt(document.getElementById("review-rating").value);
+            const text = document.getElementById("review-text").value;
+
+            if (!rating || !text) {
+                alert("Please provide both a rating and a review.");
+                return;
+            }
+
+            // Add new review
+            const reviewsContainer = document.getElementById("reviews-container");
+            const reviewDiv = document.createElement("div");
+            reviewDiv.className = "review";
+            reviewDiv.innerHTML = `
+                <p><strong>${name}</strong></p>
+                <p class="stars">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</p>
+                <p>${text}</p>
+            `;
+            reviewsContainer.appendChild(reviewDiv);
+
+            // Update Average Rating
+            const reviews = reviewsContainer.querySelectorAll(".review");
+            let totalRating = 0;
+            reviews.forEach(review => {
+                const stars = review.querySelector(".stars").textContent;
+                totalRating += stars.split("★").length - 1;
+            });
+            const averageRating = (totalRating / reviews.length).toFixed(1);
+            document.getElementById("average-rating").textContent = `${averageRating} / 5`;
+            document.getElementById("average-stars").textContent = "★".repeat(Math.round(averageRating)) + "☆".repeat(5 - Math.round(averageRating));
+
+            // Clear Form
+            document.getElementById("review-rating").value = "";
+            document.getElementById("review-text").value = "";
+        });
+
+        // Load the property details when the page loads
+        window.onload = loadPropertyDetails;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG"></script>
+</body>
+</html>
+

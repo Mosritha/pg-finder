@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F8F8F8;
+    color: #333;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.logo h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.menu button {
+    background-color: #6C63FF;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.menu-icon {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.hero h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.hero img {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+.easy-living {
+    text-align: center;
+    margin: 40px auto;
+}
+
+.easy-living h3 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.easy-living img {
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    text-align: left;
+    padding: 20px;
+    background-color: #F4F4F4;
+    margin-bottom: 50px;
+}
+
+.feature-item {
+    max-width: 300px;
+}
+
+.feature-item h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Cities Section */
+.cities {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background-color:rgb(217,217,217,100);
+    text-align: center;
+}
+
+.city {
+   margin-left:100px;
+    margin-bottom: 20px; 
+}
+
+.city h5 {
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: bold; 
+    text-align:justify;
+}
+
+.city p {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+    line-height: 1.6; 
+    text-align: justify; 
+}
+.header {
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 2px -2px gray; 
+}
+
+
+.header .roomroute {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(61, 36, 188);
+}
+
+
+.header .button-container {
+    display: flex;
+    align-items: center;
+}
+
+.header .list-button {
+    background-color: rgb(61, 36, 188, 100);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 20px; 
+}
+
+.header .menu-icon {
+    font-size: 24px;
+    color: #000;
+    cursor: pointer;
+}
+.menu-container {
+    position: relative;
+}
+
+.menu-icon {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.menu-items {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 10;
+    width: 279px;
+}
+
+.menu-items a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px 0;
+    color: #000;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+
+}
+.menu-items button {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px 0;
+    text-align: center;
+    background-color: rgb(61, 36, 188);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 10px 20px; 
+    color: white;  
+}
+
+.menu-items button:hover {
+    background-color: rgba(61, 36, 188, 0.8);
+}
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
