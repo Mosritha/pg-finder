@@ -300,8 +300,8 @@ header {
                         <input type="text" placeholder="Mobile no">
                     </div>
                     <div class="input-row">
-                        <input type="text" placeholder="Email">
-                        <input type="email" placeholder="Password">
+                        <input type="email" placeholder="Email">
+                        <input type="password" placeholder="Password">
                     </div>
                     <div class="input-field">
                         <select id="role">
@@ -312,7 +312,7 @@ header {
                         </select>
                     </div>
                     
-                    <button class="continue-btn" onclick="window.location.href='main.html'">continue</button>
+                    <button class="continue-btn">continue</button>
                     
                     
                     <p class="signin-text">
@@ -329,23 +329,47 @@ header {
         menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     }
 </script>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+
 <script>
-    function handleGoogleSignIn() {
-        google.accounts.id.initialize({
-            client_id: "YOUR_CLIENT_ID", // Replace with your OAuth2 client ID
-            callback: handleCredentialResponse
-        });
+    const continueButton = document.querySelector('.continue-btn');
 
-        google.accounts.id.prompt(); // Triggers the Google Sign-In popup
-    }
+    continueButton.addEventListener('click', async () => {
+        const name = document.querySelector('input[placeholder="name"]').value;
+        const mobile_no = document.querySelector('input[placeholder="Mobile no"]').value;
+        const email = document.querySelector('input[placeholder="Email"]').value;
+        const password = document.querySelector('input[placeholder="Password"]').value;
+        const role = document.querySelector('#role').value;
 
-    function handleCredentialResponse(response) {
-        console.log("Encoded JWT ID token: " + response.credential);
-        // You can send the token to your server for further authentication
-        // Example: Send response.credential to your backend to verify
-    }
+if (!name || !mobile_no || !email || !password || !role) {
+            alert("Please fill in all fields!");
+            return;
+        }
+
+        const payload = { name, mobile_no, email, password, role };
+        try {
+            const response = await fetch('http://localhost:3000/user/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                
+                body: JSON.stringify(payload),
+                
+            });
+            const result = await response.json();
+            if (response.ok) {
+                alert("Registration successful! Redirecting to the login page.");
+                window.location.href = 'login.html';
+            } else {
+                alert(result.message || "Failed to register.");
+            }
+        } catch (error) {
+            console.error("Error details:", error);
+            alert("An error occurred during registration.");
+        }
+    });
 </script>
+
 
     </html>
 </body>
