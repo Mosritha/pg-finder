@@ -2,6 +2,12 @@ const mongoose = require('mongoose');
 // const bcrypt = require('bcryptjs');
 
 const ownerSchema = new mongoose.Schema({
+  s_no:{
+    type: Number,
+    required:true,
+    minlength: 5,
+  },
+
   full_name: {
     type: String,
     required: true,

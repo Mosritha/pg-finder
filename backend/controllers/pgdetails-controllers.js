@@ -1,15 +1,85 @@
 const PG = require('../models/pg-model');
+ const multer = require("multer")
+ const express = require("express");
+const path = require("path");
+const fs = require("fs");
 
-// Register a new PG
-exports.registerPG = async (req, res) => {
+
+
+
+exports.registerPG = async (req, res, next) => {
   try {
-    const pg = new PG(req.body);
-    await pg.save();
-    res.status(201).json({ message: 'PG registered successfully', pg });
+    const {
+      userid,
+      name,
+      rooms,
+      select_city,
+      location,
+      mobile_no,
+      pg_name,
+      door_number,
+      nearby_details,
+      adress,
+      state,
+      pincode,
+      type,
+      room_rent,
+      security_deposit,
+      facilities,
+    } = req.body;
+
+    let images = [];
+    if (req.files) {
+      images = req.files.map((file) => file.path.replace(/\\/g, "/")); // Normalize file paths
+    }
+
+    // Create a new PG
+    const newPG = await PG.create({
+      userid,
+      name,
+      rooms,
+      select_city,
+      location,
+      mobile_no,
+      pg_name,
+      door_number,
+      nearby_details,
+      adress,
+      state,
+      pincode,
+      type,
+      room_rent,
+      security_deposit,
+      facilities,
+      images,
+    });
+
+    res.status(201).json({
+      success: true,
+      message: `PG registered successfully!`,
+      pg: newPG,
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Error registering PG', error });
+    return (error);
   }
 };
+
+
+
+
+
+
+
+
+// exports.registerPG = async (req, res) => {
+//   try {
+//     const pg = new PG(req.body);
+//     await pg.save();
+//     res.status(201).json({ message: 'PG registered successfully', pg });
+//   } catch (error) {
+//     res.status(500).json({ message: 'Error registering PG', error });
+//   }
+// };
 
 // Get all PGs
 exports.getAllPGs = async (req, res) => {
