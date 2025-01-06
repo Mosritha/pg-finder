@@ -4,7 +4,7 @@ const Owner = require('../models/pg-owner');
 
 // Register a new user
 exports.registerOwner = async (req, res) => {
-  const { full_name,  email, phone_no, registration_date } = req.body;
+  const { s_no,full_name,  email, phone_no, registration_date } = req.body;
 
   try {
     // Check if user already exists
@@ -12,7 +12,7 @@ exports.registerOwner = async (req, res) => {
     if (ownerExists) return res.status(400).json({ message: 'owner already exists' });
 
     // Create new user
-    const owner = await Owner.create({ full_name,  email, phone_no, registration_date });
+    const owner = await Owner.create({ s_no,full_name,  email, phone_no, registration_date });
     res.status(201).json({ message: 'Owner registered successfully' });
   } catch (err) {
     res.status(500).json({ message: err.message });

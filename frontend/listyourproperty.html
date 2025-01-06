@@ -313,7 +313,7 @@
         </div>
     </div>
     
-</div>
+
 <div class="content">
     <h1>For Property Owners</h1>
     <p>Rent your property for free</p>
@@ -370,21 +370,15 @@
             <label for="owner-name">Name of the owner</label>
             <input type="text" id="owner-name" name="owner-name" required>
              <br><br>
-            <label for="property-type">Property Type</label>
-            <div>
-                <input type="radio" id="apartment" name="property-type" value="Apartment" required>
-                <label for="apartment">Apartment</label>
-                <input type="radio" id="individual" name="property-type" value="Individual">
-                <label for="individual">Individual</label>
-            </div>
-            <br><br>
+            
+            
             <label for="bedrooms">No. of bedrooms in the property</label>
             <div>
-                <input type="radio" id="bedroom1" name="bedrooms" value="1" required>
+                <input type="radio" id="bedroom" name="bedrooms" value="1" required>
                 <label for="bedroom1">1</label>
-                <input type="radio" id="bedroom2" name="bedrooms" value="2">
+                <input type="radio" id="bedroom" name="bedrooms" value="2">
                 <label for="bedroom2">2</label>
-                <input type="radio" id="bedroom3" name="bedrooms" value="3">
+                <input type="radio" id="bedroom" name="bedrooms" value="3">
                 <label for="bedroom3">3</label>
                 <input type="radio" id="bedroom4" name="bedrooms" value="4">
                 <label for="bedroom4">4</label>
@@ -404,7 +398,45 @@
             <label for="mobile">Enter Mobile Number</label>
             <input type="tel" id="mobile" name="mobile" required>
             <br><br>
-            <button type="submit" onclick="window.location.href='pgdetails.html'">Continue</button>
+            <label for="name">PG Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter PG Name" required>
+
+            <label for="dno">Door Number:</label>
+            <input type="text" id="dno" name="dno" placeholder="Enter Door Number" required>
+
+            <label for="nearby">Nearby Details:</label>
+            <input type="text" id="nearby" name="nearby" placeholder="Enter Nearby Landmark">
+
+            <label for="adress">Adress:</label>
+            <input type="text" id="street" name="street" placeholder="Enter Adress">
+
+            
+
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" placeholder="Enter State Name" required>
+
+            <label for="pincode">Pincode:</label>
+            <input type="text" id="pincode" name="pincode" placeholder="Enter Pincode" required>
+
+            <label for="type">Type:</label>
+            <select id="type" name="type">
+                <option value="Single Room">Single Room</option>
+                <option value="Shared Room">Shared Room</option>
+                <option value="Dormitory">Dormitory</option>
+            </select>
+
+            <label for="rent">Room Rent (per month):</label>
+            <input type="text" id="rent" name="rent" placeholder="Enter Rent" required>
+
+            <label for="deposit">Security Deposit:</label>
+            <input type="text" id="deposit" name="deposit" placeholder="Enter Security Deposit Amount" required>
+
+            <label for="userImage" class="form-label">Upload Image</label>
+                    <input type="file" class="form-control" id="userImage" name="image" accept="image/*" required>
+
+                    <label for="name">Amenities:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter Amenties" required>
+            <button type="button" onclick="submitForm()">Submit</button>
         </form>
     </div>
 </section>
@@ -419,5 +451,58 @@
         menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     }
 </script>
+<script>
+    async function submitForm() {
+        // Collect form data
+        const formData = new FormData(document.querySelector('form'));
+        
+        // Convert form data to a JSON object
+        const data = {
+            userid: "sampleUserId", // Replace with actual user ID
+            name: formData.get('owner-name'),
+            rooms: formData.get('bedroom'),
+            select_city: formData.get('city'),
+            location: formData.get('location'),
+            mobile_no: formData.get('mobile'),
+            pg_name: formData.get('name'),
+            door_number: formData.get('dno'),
+            nearby_details: formData.get('nearby'),
+            adress: formData.get('street'),
+            state: formData.get('state'),
+            pincode: formData.get('pincode'),
+            type: formData.get('type'),
+            room_rent: formData.get('rent'),
+            security_deposit: formData.get('deposit'),
+            images: [], // Handle image upload separately
+            facilities: formData.get('name').split(','), // Assuming facilities are comma-separated
+        };
+
+        try {
+            // Send a POST request to the backend API
+            const response = await fetch('http://localhost:3000/pg/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert('PG registered successfully!');
+                console.log(result);
+            } else {
+                const error = await response.json();
+                alert(`Failed to register PG: ${error.message}`);
+                console.error(error);
+            }
+        } catch (err) {
+            console.error('Error submitting the form:', err);
+            alert('An error occurred while submitting the form.');
+        }
+    }
+</script>
+
+  
 </body>
 </html>
