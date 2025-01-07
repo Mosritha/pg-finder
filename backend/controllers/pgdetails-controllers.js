@@ -1,11 +1,4 @@
 const PG = require('../models/pg-model');
- const multer = require("multer")
- const express = require("express");
-const path = require("path");
-const fs = require("fs");
-
-
-
 
 exports.registerPG = async (req, res, next) => {
   try {
@@ -27,6 +20,7 @@ exports.registerPG = async (req, res, next) => {
       security_deposit,
       facilities,
     } = req.body;
+console.log(req.body);
 
     let images = [];
     if (req.files) {
@@ -60,26 +54,10 @@ exports.registerPG = async (req, res, next) => {
       pg: newPG,
     });
   } catch (error) {
-    return (error);
+    res.status(201).json(error)
   }
 };
 
-
-
-
-
-
-
-
-// exports.registerPG = async (req, res) => {
-//   try {
-//     const pg = new PG(req.body);
-//     await pg.save();
-//     res.status(201).json({ message: 'PG registered successfully', pg });
-//   } catch (error) {
-//     res.status(500).json({ message: 'Error registering PG', error });
-//   }
-// };
 
 // Get all PGs
 exports.getAllPGs = async (req, res) => {
