@@ -1,48 +1,95 @@
 const express = require('express');
 const router = express.Router();
 const pgController = require('../controllers/pgdetails-controllers');
-// const upload = require("../controllers/middleware/upload"); 
+const PG = require('../models/pg-model');
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-
-// Define the upload directory
-const uploadDir = path.join(__dirname, "uploads", "pg_images");
-
-// Ensure the directory exists
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-// Configure Multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, uploadDir); // Use the ensured directory
+    cb(null, 'uploads/pg_images'); // Directory to store uploaded images
   },
   filename: (req, file, cb) => {
-    const uniqueName = `${Date.now()}-${file.originalname}`;
-    cb(null, uniqueName); // Save file with a unique name
+    cb(null, `${Date.now()}-${file.originalname}`); // Unique file name
   },
 });
 
-// Configure Multer file filter and limits
-const upload = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith("image/")) {
-      cb(null, true);
-    } else {
-      cb(new Error("Only image files are allowed!"), false);
-    }
-  },
+// Filter to accept only images
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image/')) {
+    cb(null, true);
+  } else {
+    cb(new Error('Only image files are allowed!'), false);
+  }
+};
+
+// Multer middleware
+const upload = multer({ storage, fileFilter });
+
+// Updated route with profile image upload
+router.post("/register", upload.single('images'), async (req, res, next) => {
+  try {
+    const {userid,
+      name,
+      rooms,
+      select_city,
+      location,
+      mobile_no,
+      pg_name,
+      door_number,
+      nearby_details,
+      adress,
+      state,
+      pincode,
+      type,
+      room_rent,
+      security_deposit,
+      facilities, } = req.body;
+      console.log(req.body);
+      
+    // Check if a file was uploaded
+      let images = null;
+      if (req.file) {
+        images = req.file.path.replace(/\\/g, "/");   // Path to the uploaded image
+      }
+
+    // Create the user with the profile image
+    const user = {
+      userid,
+      name,
+      rooms,
+      select_city,
+      location,
+      mobile_no,
+      pg_name,
+      door_number,
+      nearby_details,
+      adress,
+      state,
+      pincode,
+      type,
+      room_rent,
+      security_deposit,
+      facilities,
+      images:images
+    };
+
+    // Save the new user to the database
+    await PG.create(user);
+
+    res.status(201).json({
+      success: true,
+      message: "User created successfully!",
+      data:user // Return user data in response
+    });
+  } catch (err) {
+    console.log(err);
+    
+  }
 });
 
-  
 
-// Routes for PG management
-router.post('/register',upload.array("images", 5), pgController.registerPG);
 router.get('/', pgController.getAllPGs);
 router.get('/:id',pgController.getSinglepg);
 router.put('/:id', pgController.updatePG);
