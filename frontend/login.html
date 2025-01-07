@@ -156,15 +156,29 @@ body {
                     });
         
                     const result = await response.json();
-        
                     if (response.ok) {
-                        localStorage.setItem('user', JSON.stringify(result.user));
+    // Assuming the response contains a user object with a role property
+    localStorage.setItem('user', JSON.stringify(result.user));
+    alert("Login successful!");
 
-                        alert("Login successful! Redirecting to the main page.");
-                        window.location.href = 'main.html';
-                    } else {
-                        alert(result.message || "User not found!");
-                    }
+    const userRole = result.user.role; // Access the role of the user
+
+    if (userRole === 'admin') {
+        // Redirect to the admin pageq
+        window.location.href = 'admin1.html';
+    } else if (userRole === 'user') {
+        // Redirect to the main page for regular users
+        window.location.href = 'main.html';
+    } else {
+        // Handle other roles or unexpected role values if necessary
+        alert("Role not recognized. Redirecting to the default page.");
+        window.location.href = 'pgpage1.html'; // Replace with your default page
+    }
+} else {
+    // Handle non-ok response
+    alert("Login failed. Please check your credentials and try again.");
+}
+
                 } catch (error) {
                     console.error("Error details:", error);
                     alert("An error occurred during login.");
