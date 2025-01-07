@@ -45,7 +45,7 @@
                         </tr>
                     </thead>
                     <tbody id="userTable">
-                        <!-- User data will be dynamically populated here -->
+                       
                     </tbody>
                 </table>
             </div>
@@ -53,7 +53,6 @@
     </div>
    
     <script>
-        // Function to load owners data from the backend
         function loadOwners() {
             fetch('http://localhost:3000/owner/')  // Update this URL if your API path changes
                 .then(response => {
