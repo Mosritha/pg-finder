@@ -69,7 +69,7 @@
     background-color: #fdebbf;
   }
   .header {
-    background-color: white;
+    background-color: #f0f8ff;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;  
@@ -170,7 +170,7 @@
 footer {
   text-align: center;
   padding: 10px;
-  background-color: #ffffff;
+  background-color: #f0f8ff;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
 }

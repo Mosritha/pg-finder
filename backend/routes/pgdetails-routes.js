@@ -8,10 +8,10 @@ const fs = require("fs");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/pg_images'); // Directory to store uploaded images
+    cb(null, 'uploads/pg_images');
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`); // Unique file name
+    cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
 
@@ -46,7 +46,7 @@ router.post("/register", upload.single('images'), async (req, res, next) => {
       room_rent,
       security_deposit,
       facilities, } = req.body;
-      console.log(req.body);
+      // console.log(req.body);
       
     // Check if a file was uploaded
       let images = null;

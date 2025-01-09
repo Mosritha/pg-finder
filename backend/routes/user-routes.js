@@ -4,6 +4,8 @@ const router = express.Router();
 
 
 router.post('/register', UserController.registerUser);
+router.get('/getallusers', UserController.getUsersByRole);
+router.get('/getallowner',UserController.getpgownerByRole);
 router.post('/login', UserController.loginUser);
 router.get('/', UserController.getAllusers);
 router.get('/:id',UserController.getSingleuser);

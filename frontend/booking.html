@@ -42,23 +42,20 @@
     <!-- Booking Details -->
     <div class="bookings-section">
       <h2>Current PG bookings:</h2>
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Address</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Check-in</th>
-          <th>Action</th>
-        </tr>
-        <tr>
-          <td>Ganapath PG</td>
-          <td>Kukatapally</td>
-          <td>Hyderabad</td>
-          <td>Telangana</td>
-          <td>April 15</td>
-          <td>Booked</td>
-        </tr>
+      <table id="bookings-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Profession</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Staying Months</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data will be dynamically inserted here -->
+        </tbody>
       </table>
     </div>
   </div>
@@ -71,6 +68,68 @@
         const menu = document.getElementById('menu');
         menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     }
+</script>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+
+  // Function to fetch booking data from the API
+  async function fetchBookings() {
+    try {
+      // Get the logged-in user's user ID from local storage
+      const loggedInUserId = localStorage.getItem('user');
+      const user = JSON.parse(loggedInUserId);
+const userid = user._id
+
+      if (!loggedInUserId) {
+        console.error('No logged-in user found in local storage');
+        return;
+      }
+
+      // API endpoint
+      const apiUrl = `http://localhost:3000/booking/status/${userid}`;
+
+      // Fetch data from the API
+      const response = await fetch(apiUrl);
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch bookings: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      // Check if bookings are available
+      const userBookings = data.bookings || [];
+
+      // Populate the table with the bookings data
+      const bookingsTable = document.querySelector('#bookings-table tbody');
+      bookingsTable.innerHTML = ''; // Clear any existing rows
+
+      if (userBookings.length > 0) {
+        userBookings.forEach(booking => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${booking.name}</td>
+            <td>${booking.age}</td>
+            <td>${booking.profession}</td>
+            <td>${booking.email}</td>
+            <td>${booking.phone}</td>
+            <td>${booking.months}</td>
+          `;
+          bookingsTable.appendChild(row);
+        });
+      } else {
+        bookingsTable.innerHTML = '<tr><td colspan="6">No bookings found for the current user.</td></tr>';
+      }
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+    }
+  }
+
+  // Load bookings data when the page loads
+  window.onload = fetchBookings;
 </script>
 
 </body>
