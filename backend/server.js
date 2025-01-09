@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const userroutes = require("./routes/user-routes")
 const bodyParser = require('body-parser');
 const pgdetails = require("./routes/pgdetails-routes")
+const pglistdetails = require("./routes/pglist-routes")
 const ownerdetails = require("./routes/owner-routes")
 const userdetails = require("./routes/pguser-routes")
 const bookingdetails = require("./routes/booknow-routes")
@@ -26,7 +27,7 @@ app.use('/pg', pgdetails);
 app.use('/owner',ownerdetails);
 app.use('/pguser',userdetails);
 app.use('/booking',bookingdetails);
-
+app.use('/pglist', pglistdetails);
 mongoose.connect("mongodb://0.0.0.0:27017/pg-finder")
 .then(()=>{
     console.log("connected to database!");

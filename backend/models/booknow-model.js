@@ -19,7 +19,6 @@ const BookingSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
     lowercase: true,
   },
   phone: {
@@ -29,6 +28,11 @@ const BookingSchema = new mongoose.Schema({
   },
   months: {
     type: Number,
+    required: true,
+    trim: true,
+  }, 
+  userid: {
+    type: String,
     required: true,
     trim: true,
   }, 

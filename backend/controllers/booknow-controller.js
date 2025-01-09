@@ -4,20 +4,11 @@ const Booking = require('../models/booknow-model');
 
 // Register a new user
 exports.registerBooking = async (req, res) => {
-    console.log("Request Body:", req.body); // Log incoming data
     try {
-      const { name, age, profession, email, phone, months } = req.body;
-  
-      // Check if booking already exists
-      const bookingExists = await Booking.findOne({ email });
-      if (bookingExists) {
-        console.log("Booking already exists for email:", email);
-        return res.status(400).json({ message: "Booking with this email already exists." });
-      }
-  
+      const { name, age, profession, email, phone, months,userid } = req.body;
+
       // Create new booking
-      const booking = await Booking.create({ name, age, profession, email, phone, months });
-      console.log("Booking created:", booking);
+      const booking = await Booking.create({ name, age, profession, email, phone, months,userid });
       res.status(201).json({ message: "Booking completed successfully", booking });
     } catch (err) {
       console.error("Error in registerBooking:", err.message);
@@ -25,7 +16,23 @@ exports.registerBooking = async (req, res) => {
     }
   };
   
+exports.getstatusbyuserid = async(req,res) =>{
+  try {
+       const { userid } = req.params
+       console.log(userid);
+  const bookings = await Booking.find({userid})
+  // if (!bookings.length) {
+  //   return res.status(404).json({ message: "No bookings found for this user" });
+  // }
 
+  res.status(200).json({
+    message: "Booking details retrieved successfully",
+    bookings,
+  });
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error", error: error.message });
+  }
+}
 
 
 

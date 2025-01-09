@@ -19,6 +19,37 @@ exports.registerUser = async (req, res) => {
   }
 };
 
+// Get all users by role
+exports.getUsersByRole = async (req, res) => {
+  try {
+    // Find all users with the role "admin"
+    const adminUsers = await User.find({ role: 'user' });
+
+    if (adminUsers.length === 0) {
+      return res.status(404).json({ message: 'No admin users found' });
+    }
+
+    res.status(200).json(adminUsers);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.getpgownerByRole = async (req, res) => {
+  try {
+    const adminOwners = await User.find({ role: 'pg-owner' });
+
+    if (adminOwners.length === 0) {
+      return res.status(404).json({ message: 'No pg-owner users found' });
+    }
+
+    res.status(200).json(adminOwners);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
 // Login user
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;

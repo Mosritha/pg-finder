@@ -25,7 +25,7 @@
         footer {
             text-align: center;
             padding: 10px;
-            background-color: #ffffff;
+            background-color: #f0f8ff;
             box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
         }
@@ -33,7 +33,7 @@
             margin-top:100px;
         }
         .header {
-    background-color: white;
+    background-color: #f0f8ff;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;  /* Spread content across the header */
@@ -138,26 +138,6 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="roomroute">RoomRoute</div> <!-- RoomRoute Text -->
-        <div class="button-container">
-            <a href="./pglist.html"><button class="list-button">Find Perfect PG</button></a>
-             <!-- List Your Property Button -->
-            <div class="menu-container">
-                <div class="menu-icon" onclick="toggleMenu()">☰</div>
-                <div class="menu-items" id="menu">
-                    <a href="./main.html">Explore</a>
-                    <a href="./about.html">About Us</a>
-                    <a href="./booking.html">Booking Status</a>
-                    
-                    <a href="./pgpage1.html">For PG owners</a>
-                    <a href="./login.html"><button>Login</button></a>
-                        <a href="./create.html"><button>Create Account</button></a>    
-                </div>
-            </div>
-        </div>
-        
-    </div>
     <div class="container mt-5 mb-5">
         <h2 class="mb-3">Booking Form</h2>
         <form id="booking-form">
@@ -171,28 +151,15 @@
                 <input type="number" id="age" name="age" class="form-control" placeholder="Enter your age" required>
             </div>
             <div class="mb-3">
-                <label for="profession" class="form-label"><strong>Profession:</strong></label>
-                <input type="text" id="profession" name="profession" class="form-control" placeholder="Enter your profession" required>
-            </div>
-            <div class="mb-3">
                 <label for="email" class="form-label"><strong>Email:</strong></label>
                 <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
             </div>
             <div class="mb-3">
-                <label for="phone" class="form-label"><strong>Phone Number:</strong></label>
-                <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" required>
-            </div>
-
-            <!-- Stay Details -->
-            <div class="mb-3">
-                <label for="months" class="form-label"><strong>How Many Months to Stay:</strong></label>
+                <label for="months" class="form-label"><strong>Months to Stay:</strong></label>
                 <input type="number" id="months" name="months" class="form-control" placeholder="Enter number of months" required>
             </div>
-            
 
             <!-- Terms and Conditions -->
-            <h5 class="section-title mt-4">Terms and Conditions</h5>
-            <p><a href="./tenancy.html">Tenancy Policy</a> | <a href="./privacy.html">Privacy Policy</a></p>
             <div class="form-check">
                 <input type="checkbox" id="terms" name="terms" class="form-check-input" required>
                 <label for="terms" class="form-check-label">I agree to the tenancy and privacy policy</label>
@@ -200,55 +167,47 @@
 
             <!-- Submit Button -->
             <div class="mt-4 text-center">
-                <button type="submit" class="btn btn-submit btn-lg">Submit Booking</button>
+                <button type="submit" class="btn btn-primary btn-lg">Submit Booking</button>
             </div>
         </form>
-
-        <!-- Booking Confirmation -->
-        
     </div>
-    <footer>
-        <p>&copy; 2024 RoomRoute. All Rights Reserved.</p>
-    </footer>
 
     <script>
+        // Fetch owner ID from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const ownerId = urlParams.get("ownerid");
+        console.log(ownerId);
+
+        // Handle form submission
         const bookingForm = document.getElementById("booking-form");
-        const confirmationMessage = document.getElementById("booking-confirmation");
-
-        bookingForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            confirmationMessage.classList.remove("d-none");
-            confirmationMessage.scrollIntoView({ behavior: "smooth" });
-            bookingForm.reset();
-        });
-    </script>
-    <script>
         bookingForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(bookingForm);
-    const data = Object.fromEntries(formData.entries());
-    try {
-        const response = await fetch("http://localhost:3000/booking/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-        });
-        if (response.ok) {
-            alert("Booking confirmed! 🎉");
-            confirmationMessage.classList.remove("d-none");
-            
-            confirmationMessage.scrollIntoView({ behavior: "smooth" });
-            bookingForm.reset();
-        } else {
-            alert("Error submitting booking!");
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Something went wrong!");
-    }
-});
+            e.preventDefault();
 
+            const formData = new FormData(bookingForm);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Include owner_id in the booking payload
+            data.owner_id = ownerId;
+
+            try {
+                const response = await fetch("http://localhost:3000/booking/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    alert("Booking confirmed!");
+                    window.location.href = "confirmation.html"; // Redirect after success
+                } else {
+                    alert("Error submitting booking!");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Something went wrong!");
+            }
+        });
     </script>
-    
 </body>
+
 </html>
